@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MovieList</string>
+    <string name="popular">Popular</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="favorites">Favorites</string>
+    <string name="no_internet_error_message">No internet access</string>
+</resources>
