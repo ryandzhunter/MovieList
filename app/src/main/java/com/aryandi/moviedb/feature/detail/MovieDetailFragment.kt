@@ -41,7 +41,7 @@ class MovieDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         subscribeToData()
         rv_video_trailer.layoutManager =
-            LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         rv_video_trailer.adapter = adapter
         viewModel.getMovieDetail(args.movieId)
     }
