@@ -24,6 +24,9 @@ interface MovieApi {
     @GET("discover/movie")
     suspend fun getMovies(): Response<MovieResponse>
 
+    @GET("movie/{type}")
+    suspend fun getTypeMovies(@Path("type") type: String) : Response<MovieResponse>
+
     @GET("movie/{id}?append_to_response=videos,reviews")
     suspend fun getMovieDetails(@Path("id") movieId: Int) : Response<MovieDetailData>
 
@@ -35,9 +38,6 @@ interface MovieApi {
         @Query("primary_release_date.lte") releaseDate: String,
         @Query("sort_by") sortBy: String, @Query("page") page: Int
     )
-
-    @GET("movie/{type}")
-    fun getTypeMovies(@Path("type") type: String)
 
     @GET("search/movie")
     fun searchMovies(@Query("query") query: String)

@@ -10,5 +10,6 @@ import com.aryandi.domain.model.Result
  */
 interface MovieRepository {
     suspend fun getMovies(): Result<List<MovieDomain>>
+    suspend fun getTypeMovies(type : String) : Result<List<MovieDomain>>
     suspend fun getMovieDetail(id : Int) : Result<MovieDetailDomain>
 }

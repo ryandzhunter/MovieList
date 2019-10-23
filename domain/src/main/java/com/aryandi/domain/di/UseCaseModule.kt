@@ -1,9 +1,6 @@
 package com.aryandi.domain.di
 
-import com.aryandi.domain.usecase.GetMovieDetailUseCase
-import com.aryandi.domain.usecase.GetMovieDetailUseCaseImpl
-import com.aryandi.domain.usecase.GetMoviesUseCase
-import com.aryandi.domain.usecase.GetMoviesUseCaseImpl
+import com.aryandi.domain.usecase.*
 import org.koin.dsl.module
 
 /**
@@ -13,4 +10,6 @@ import org.koin.dsl.module
 val useCaseModules = module {
     factory<GetMoviesUseCase> { GetMoviesUseCaseImpl(get()) }
     factory<GetMovieDetailUseCase> { GetMovieDetailUseCaseImpl(get())}
+    factory<GetTopRatedMoviesUseCase> { GetTopRatedMoviesUseCaseImpl(get())}
+    factory<GetPopularMoviesUseCase> { GetPopularMoviesUseCaseImpl(get())}
 }

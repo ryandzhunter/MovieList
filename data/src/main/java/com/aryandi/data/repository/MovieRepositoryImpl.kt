@@ -16,6 +16,10 @@ class MovieRepositoryImpl(private val movieApi: MovieApi) :
         return movieApi.getMovies().getData()
     }
 
+    override suspend fun getTypeMovies(type: String): Result<List<MovieDomain>> {
+        return movieApi.getTypeMovies(type).getData()
+    }
+
     override suspend fun getMovieDetail(id: Int): Result<MovieDetailDomain> {
         return movieApi.getMovieDetails(id).getData()
     }

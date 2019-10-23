@@ -1,9 +1,7 @@
 package com.aryandi.moviedb.feature.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aryandi.domain.model.MovieDomain
@@ -22,6 +20,11 @@ class HomeFragment : BaseFragment() {
 
     val viewModel: HomeViewModel by viewModel()
     private val adapter = MovieGridAdapter(mutableListOf()) { doOnClickAdapter(it) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true);
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -71,5 +74,27 @@ class HomeFragment : BaseFragment() {
     private fun showMovies(movies: List<MovieDomain>) {
         hideLoading(progress_bar)
         adapter.setMovies(movies)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.main, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.action_popular -> {
+                viewModel.loadTopRatedMovies()
+                return true
+            }
+            R.id.action_top_rated -> {
+                viewModel.loadPopularMovies()
+                return true
+            }
+            R.id.action_favorites -> {
+                return true
+            }
+            else -> return super.onOptionsItemSelected(item)
+        }
     }
 }
