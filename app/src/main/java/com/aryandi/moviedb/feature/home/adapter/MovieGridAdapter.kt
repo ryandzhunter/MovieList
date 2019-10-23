@@ -14,7 +14,10 @@ import kotlinx.android.synthetic.main.grid_item_movie.view.*
  * @author Aryandi Putra (aryandi.putra@dana.id)
  * @version MovieGridAdapter, v 0.1 2019-10-17 14:27 by Aryandi Putra
  */
-class MovieGridAdapter(private val movies: MutableList<MovieDomain>) :
+class MovieGridAdapter(
+    private val movies: MutableList<MovieDomain>,
+    private val clickListener: (MovieDomain) -> Unit
+) :
     RecyclerView.Adapter<MovieHolder>() {
 
     companion object {
@@ -44,9 +47,11 @@ class MovieGridAdapter(private val movies: MutableList<MovieDomain>) :
         fun bind(movie: MovieDomain) = with(view) {
             if (movie.posterPath != null) {
                 Glide.with(view.context).load(TMDB_IMAGEURL + movie.posterPath)
-                    .into(movie_imageview)
+                    .into(img_movie)
+            }
+            view.setOnClickListener {
+                clickListener(movie)
             }
         }
-
     }
 }

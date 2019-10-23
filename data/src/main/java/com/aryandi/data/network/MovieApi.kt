@@ -1,6 +1,7 @@
 package com.aryandi.data.network
 
 import com.aryandi.data.MovieResponse
+import com.aryandi.data.model.MovieDetailData
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
@@ -23,6 +24,9 @@ interface MovieApi {
     @GET("discover/movie")
     suspend fun getMovies(): Response<MovieResponse>
 
+    @GET("movie/{id}?append_to_response=videos,reviews")
+    suspend fun getMovieDetails(@Path("id") movieId: Int) : Response<MovieDetailData>
+
     @GET("search/movie")
     fun searchMovie(@Query("query") q: String): Call<MovieResponse>
 
@@ -31,9 +35,6 @@ interface MovieApi {
         @Query("primary_release_date.lte") releaseDate: String,
         @Query("sort_by") sortBy: String, @Query("page") page: Int
     )
-
-    @GET("movie/{id}?append_to_response=videos,reviews")
-    fun getMovieDetails(@Path("id") movieId: Int)
 
     @GET("movie/{type}")
     fun getTypeMovies(@Path("type") type: String)

@@ -1,5 +1,6 @@
 package com.aryandi.domain.repository
 
+import com.aryandi.domain.model.MovieDetailDomain
 import com.aryandi.domain.model.MovieDomain
 import com.aryandi.domain.model.Result
 
@@ -9,4 +10,5 @@ import com.aryandi.domain.model.Result
  */
 interface MovieRepository {
     suspend fun getMovies(): Result<List<MovieDomain>>
+    suspend fun getMovieDetail(id : Int) : Result<MovieDetailDomain>
 }

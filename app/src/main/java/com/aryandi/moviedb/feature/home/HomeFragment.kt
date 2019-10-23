@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.aryandi.domain.model.MovieDomain
 import com.aryandi.moviedb.R
@@ -20,7 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class HomeFragment : BaseFragment() {
 
     val viewModel: HomeViewModel by viewModel()
-    private val adapter = MovieGridAdapter(mutableListOf())
+    private val adapter = MovieGridAdapter(mutableListOf()) { doOnClickAdapter(it) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,6 +36,13 @@ class HomeFragment : BaseFragment() {
         recycler_view.layoutManager = GridLayoutManager(context, 2)
         recycler_view.adapter = adapter
         viewModel.loadMovies()
+    }
+
+    private fun doOnClickAdapter(movie: MovieDomain) {
+        movie.id?.let {
+            val actionHomeToDetail = HomeFragmentDirections.actionHomeToDetail(it)
+            findNavController().navigate(actionHomeToDetail)
+        }
     }
 
     private fun subscribeToData() {

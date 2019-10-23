@@ -28,9 +28,25 @@ class MovieResponse(
     override fun mapToDomainModel(): List<MovieDomain> {
         val list = arrayListOf<MovieDomain>()
         results?.forEach{
-            list.add(MovieDomain(it.voteCount, it.id, it.video, it.voteAverage, it.title,
-                it.popularity, it.posterPath, it.originalLanguage, it.originalTitle, it.genreIds, it.backdropPath, it.adult,
-                it.overview, it.releaseDate, it.watched))
+            list.add(
+                MovieDomain(
+                    it.voteCount,
+                    it.id,
+                    it.video,
+                    it.voteAverage,
+                    it.title,
+                    it.popularity,
+                    it.posterPath,
+                    it.originalLanguage,
+                    it.originalTitle,
+                    it.genreIds,
+                    it.backdropPath,
+                    it.adult,
+                    it.overview,
+                    it.releaseDate,
+                    it.watched
+                )
+            )
         }
         return list
     }

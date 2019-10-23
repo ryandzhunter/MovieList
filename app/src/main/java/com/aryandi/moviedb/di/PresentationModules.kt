@@ -1,5 +1,6 @@
 package com.aryandi.moviedb.di
 
+import com.aryandi.moviedb.feature.detail.MovieDetailViewModel
 import com.aryandi.moviedb.feature.home.HomeViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -10,4 +11,5 @@ import org.koin.dsl.module
  */
 val presentasionModules = module() {
     viewModel{ HomeViewModel(get())}
+    viewModel { MovieDetailViewModel(get()) }
 }
