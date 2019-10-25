@@ -92,6 +92,7 @@ class HomeFragment : BaseFragment() {
                 return true
             }
             R.id.action_favorites -> {
+                viewModel.loadFavoriteMovies()
                 return true
             }
             else -> return super.onOptionsItemSelected(item)

@@ -10,6 +10,6 @@ import org.koin.dsl.module
  * @version PresentationModules, v 0.1 2019-10-21 10:45 by Aryandi Putra
  */
 val presentasionModules = module() {
-    viewModel{ HomeViewModel(get(), get(), get())}
-    viewModel { MovieDetailViewModel(get()) }
+    viewModel{ HomeViewModel(get(), get(), get(), get())}
+    viewModel { MovieDetailViewModel(get(), get(), get(), get())}
 }

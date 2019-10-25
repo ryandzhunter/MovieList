@@ -19,6 +19,4 @@ data class MovieDomain(
     var backdropPath: String? = null,
     var adult: Boolean? = null,
     var overview: String? = null,
-    var releaseDate: String? = null,
-    var watched: Boolean = false
-)
+    var releaseDate: String? = null)

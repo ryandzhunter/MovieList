@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aryandi.domain.model.MovieDetailDomain
 import com.aryandi.domain.model.VideoDomain
+import com.aryandi.domain.model.toMovieDomain
 import com.aryandi.moviedb.R
 import com.aryandi.moviedb.base.*
 import com.aryandi.moviedb.common.ext.subscribe
@@ -97,5 +98,9 @@ class MovieDetailFragment : BaseFragment() {
         tv_movie_description.text = data.overview
 
         data.videos?.let { adapter.setVideos(it) }
+
+        btn_favorite_movie.setOnClickListener {
+            viewModel.saveFavoriteMovie(toMovieDomain(data))
+        }
     }
 }

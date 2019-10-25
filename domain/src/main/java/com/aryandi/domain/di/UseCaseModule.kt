@@ -12,4 +12,8 @@ val useCaseModules = module {
     factory<GetMovieDetailUseCase> { GetMovieDetailUseCaseImpl(get())}
     factory<GetTopRatedMoviesUseCase> { GetTopRatedMoviesUseCaseImpl(get())}
     factory<GetPopularMoviesUseCase> { GetPopularMoviesUseCaseImpl(get())}
+    factory<SaveFavoriteMovieUseCase> { SaveFavoriteMovieUseCaseImpl(get())}
+    factory<RemoveFavoriteMovieUseCase> { RemoveFavoriteMovieUseCaseImpl(get()) }
+    factory<GetAllFavoriteMoviesUseCase> { GetAllFavoriteMoviesUseCaseImpl(get()) }
+    factory<IsFavoriteMovieExistUseCase> { IsFavoriteMovieExistUseCaseImpl(get()) }
 }

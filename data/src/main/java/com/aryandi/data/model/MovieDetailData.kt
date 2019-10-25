@@ -39,7 +39,7 @@ data class MovieDetailData(
     var imdbId: String? = null,
 
     @SerializedName("popularity")
-    var popularity: Double = 0.0,
+    var popularity: Float = 0F,
 
     @SerializedName("revenue")
     var revenue: Int? = null,
@@ -54,7 +54,7 @@ data class MovieDetailData(
     var video: Boolean = false,
 
     @SerializedName("vote_average")
-    var voteAverage: Double = 0.0,
+    var voteAverage: Float = 0F,
 
     @SerializedName("vote_count")
     var voteCount: Int = 0,

@@ -2,7 +2,9 @@ package com.aryandi.data.di
 
 import com.aryandi.data.common.utils.Connectivity
 import com.aryandi.data.common.utils.ConnectivityImpl
+import com.aryandi.data.repository.FavoriteMovieRepositoryImpl
 import com.aryandi.data.repository.MovieRepositoryImpl
+import com.aryandi.domain.repository.FavoriteMovieRepository
 import com.aryandi.domain.repository.MovieRepository
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -13,5 +15,6 @@ import org.koin.dsl.module
  */
 val repositoryModules = module {
     factory<MovieRepository> { MovieRepositoryImpl(get())}
+    factory<FavoriteMovieRepository> { FavoriteMovieRepositoryImpl(get())}
     factory<Connectivity> { ConnectivityImpl(androidContext()) }
 }
