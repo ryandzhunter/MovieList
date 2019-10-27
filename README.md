@@ -5,7 +5,7 @@ This project is an example for implementation of Clean Architecture, Koin, Corou
 Use Case Diagram
 -----------------
 
-https://ibb.co/9g7jvQ6
+![https://ibb.co/9g7jvQ6](https://i.ibb.co/7CqFzsP/Screen-Shot-2019-10-27-at-23-02-19.png)
 
 Clean architecture
 -----------------
