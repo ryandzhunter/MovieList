@@ -1,6 +1,7 @@
 package com.aryandi.domain.usecase
 
 import com.aryandi.domain.model.MovieDomain
+import com.aryandi.domain.model.Result
 
 /**
  * @author Aryandi Putra (aryandi.putra@dana.id)
@@ -8,6 +9,6 @@ import com.aryandi.domain.model.MovieDomain
  */
 interface SaveFavoriteMovieUseCase {
 
-    suspend operator fun invoke(param : MovieDomain)
+    suspend operator fun invoke(param : MovieDomain): Result<Long>
 
 }

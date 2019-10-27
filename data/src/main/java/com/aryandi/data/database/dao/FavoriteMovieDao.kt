@@ -11,14 +11,14 @@ import com.aryandi.data.MovieData
 interface FavoriteMovieDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertMovie(favoriteMovieData: MovieData)
+    suspend fun insertMovie(favoriteMovieData: MovieData) : Long
 
     @Delete
-    suspend fun removeMovie(favoriteMovieData: MovieData)
+    suspend fun removeMovie(favoriteMovieData: MovieData) : Int
 
     @Query("SELECT * FROM favorite_movies")
-    fun getFavorites(): List<MovieData>
+    suspend fun getFavorites(): List<MovieData>
 
     @Query("SELECT * FROM favorite_movies WHERE id=:movieId")
-    fun getMovie(movieId: Int?): MovieData
+    suspend fun getMovie(movieId: Int?): MovieData?
 }

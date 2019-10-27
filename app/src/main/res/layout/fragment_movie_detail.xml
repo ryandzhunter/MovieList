@@ -62,8 +62,8 @@
                 android:id="@+id/btn_favorite_movie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Favorite Button"
                 android:padding="8dp"
+                android:visibility="gone"
                 app:layout_constraintStart_toStartOf="@+id/tv_movie_date"
                 app:layout_constraintTop_toBottomOf="@+id/tv_movie_rate"/>
 

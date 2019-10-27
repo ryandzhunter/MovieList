@@ -1,5 +1,6 @@
 package com.aryandi.moviedb.feature.detail
 
+import androidx.lifecycle.MutableLiveData
 import com.aryandi.domain.model.MovieDetailDomain
 import com.aryandi.domain.model.MovieDomain
 import com.aryandi.domain.model.onFailure
@@ -17,27 +18,47 @@ import com.aryandi.moviedb.feature.home.HomeViewEffects
  * @author Aryandi Putra (aryandi.putra@dana.id)
  * @version MovieDetailViewModel, v 0.1 2019-10-22 10:08 by Aryandi Putra
  */
-class MovieDetailViewModel(private val getMovieDetail: GetMovieDetailUseCase,
-                           private val saveFavoriteMovie : SaveFavoriteMovieUseCase,
-                           private val removeFavoriteMovie : RemoveFavoriteMovieUseCase,
-                           private val isFavoriteMovieExist : IsFavoriteMovieExistUseCase
-)
-    : BaseViewModel<MovieDetailDomain, HomeViewEffects>() {
+class MovieDetailViewModel(
+    private val getMovieDetailUseCase: GetMovieDetailUseCase,
+    private val saveFavoriteMovieUseCase: SaveFavoriteMovieUseCase,
+    private val removeFavoriteMovieUseCase: RemoveFavoriteMovieUseCase,
+    private val isFavoriteMovieExistUseCase: IsFavoriteMovieExistUseCase
+) : BaseViewModel<MovieDetailDomain, HomeViewEffects>() {
 
-    fun getMovieDetail(id : Int) = executeUseCase {
-        getMovieDetail.invoke(id).onSuccess { _viewState.value = Success(it) }
+    var favoriteState: MutableLiveData<Boolean> = MutableLiveData()
+
+    fun getMovieDetail(id: Int) = executeUseCase {
+        getMovieDetailUseCase(id).onSuccess { _viewState.value = Success(it) }
             .onFailure { _viewState.value = Error(it.throwable) }
     }
 
+    fun onFavoriteButtonClicked(movieDomain: MovieDomain) = executeUseCase {
+        if (favoriteState.value == true) {
+            removeFavoriteMovie(movieDomain)
+        } else {
+            saveFavoriteMovie(movieDomain)
+        }
+    }
+
     fun saveFavoriteMovie(movieDomain: MovieDomain) = executeUseCase {
-        saveFavoriteMovie.invoke(movieDomain)
+        saveFavoriteMovieUseCase(movieDomain).onSuccess {
+            favoriteState.value = true
+        }.onFailure { _viewState.value = Error(it.throwable) }
     }
 
     fun removeFavoriteMovie(movieDomain: MovieDomain) = executeUseCase {
-        removeFavoriteMovie.invoke(movieDomain)
+        removeFavoriteMovieUseCase(movieDomain).onSuccess {
+            favoriteState.value = false
+        }.onFailure { _viewState.value = Error(it.throwable) }
     }
 
-    fun isFavoriteMovieExist(movieDomain: MovieDomain) = executeUseCase {
-        isFavoriteMovieExist.invoke(movieDomain)
+    fun isFavoriteMovieExist(movieId: Int) = executeUseCase {
+        isFavoriteMovieExistUseCase(movieId).onSuccess {
+            favoriteState.value = it.id == movieId
+        }.onFailure {
+            favoriteState.value = false
+            _viewState.value = Error(it.throwable)
+        }
     }
+
 }

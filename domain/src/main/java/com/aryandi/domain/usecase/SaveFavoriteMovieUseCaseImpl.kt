@@ -1,6 +1,7 @@
 package com.aryandi.domain.usecase
 
 import com.aryandi.domain.model.MovieDomain
+import com.aryandi.domain.model.Result
 import com.aryandi.domain.repository.FavoriteMovieRepository
 
 /**
@@ -10,7 +11,6 @@ import com.aryandi.domain.repository.FavoriteMovieRepository
 class SaveFavoriteMovieUseCaseImpl(private val repository: FavoriteMovieRepository) :
     SaveFavoriteMovieUseCase {
 
-    override suspend operator fun invoke(param: MovieDomain) {
+    override suspend operator fun invoke(param: MovieDomain): Result<Long> =
         repository.insertFavoriteMovie(param)
-    }
 }

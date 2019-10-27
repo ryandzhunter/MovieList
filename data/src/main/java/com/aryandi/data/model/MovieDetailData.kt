@@ -102,7 +102,7 @@ data class MovieDetailData(
             budget,
             genresDomain,
             videosDomain,
-            null,
+            reviewsDomain,
             homepage,
             id,
             imdbId,

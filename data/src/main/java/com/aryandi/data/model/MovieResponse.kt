@@ -29,9 +29,9 @@ class MovieResponse(
 ) : DomainMapper<List<MovieDomain>> {
 
     override fun mapToDomainModel(): List<MovieDomain> {
-        val list = arrayListOf<MovieDomain>()
+        val moviesDomain = arrayListOf<MovieDomain>()
         results?.forEach{
-            list.add(
+            moviesDomain.add(
                 MovieDomain(
                     it.voteCount,
                     it.id,
@@ -46,11 +46,12 @@ class MovieResponse(
                     it.backdropPath,
                     it.adult,
                     it.overview,
-                    it.releaseDate
+                    it.releaseDate,
+                    it.isFavorite
                 )
             )
         }
-        return list
+        return moviesDomain
     }
 
 }
@@ -99,4 +100,5 @@ data class MovieData(
     var overview: String? = null,
     @SerializedName("release_date")
     @Expose
-    var releaseDate: String? = null)
+    var releaseDate: String? = null,
+    var isFavorite: Boolean? = null)

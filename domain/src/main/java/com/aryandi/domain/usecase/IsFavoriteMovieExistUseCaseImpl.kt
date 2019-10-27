@@ -2,6 +2,7 @@ package com.aryandi.domain.usecase
 
 import com.aryandi.domain.model.MovieDomain
 import com.aryandi.domain.repository.FavoriteMovieRepository
+import com.aryandi.domain.model.Result
 
 /**
  * @author Aryandi Putra (aryandi.putra@dana.id)
@@ -9,6 +10,6 @@ import com.aryandi.domain.repository.FavoriteMovieRepository
  */
 class IsFavoriteMovieExistUseCaseImpl(private val repository: FavoriteMovieRepository) :
     IsFavoriteMovieExistUseCase {
-    override suspend fun invoke(param: MovieDomain): MovieDomain =
+    override suspend fun invoke(param: Int): Result<MovieDomain> =
         repository.isFavoriteMovieExist(param)
 }

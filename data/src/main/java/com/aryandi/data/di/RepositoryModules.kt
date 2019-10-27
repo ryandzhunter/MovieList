@@ -1,5 +1,6 @@
 package com.aryandi.data.di
 
+import com.aryandi.data.common.coroutines.CoroutineContextProvider
 import com.aryandi.data.common.utils.Connectivity
 import com.aryandi.data.common.utils.ConnectivityImpl
 import com.aryandi.data.repository.FavoriteMovieRepositoryImpl
@@ -17,4 +18,5 @@ val repositoryModules = module {
     factory<MovieRepository> { MovieRepositoryImpl(get())}
     factory<FavoriteMovieRepository> { FavoriteMovieRepositoryImpl(get())}
     factory<Connectivity> { ConnectivityImpl(androidContext()) }
+    single { CoroutineContextProvider() }
 }

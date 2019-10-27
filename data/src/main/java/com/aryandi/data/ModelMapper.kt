@@ -42,6 +42,5 @@ fun toDomain(movieData: MovieData) = MovieDomain(
 )
 
 fun toDomain(movieDatas: List<MovieData>): List<MovieDomain> {
-    return movieDatas.map { toDomain(it)
-    }
+    return movieDatas.map(::toDomain)
 }

@@ -24,20 +24,22 @@ class HomeViewModel(
     BaseViewModel<List<MovieDomain>, HomeViewEffects>() {
 
     fun loadMovies() = executeUseCase {
-        getMovies.invoke("").onSuccess { _viewState.value = Success(it) }
+        getMovies("").onSuccess { _viewState.value = Success(it) }
             .onFailure { _viewState.value = Error(it.throwable) }
     }
 
     fun loadPopularMovies() = executeUseCase {
-        getPopularMovies.invoke("").onSuccess { _viewState.value = Success(it) }
+        getPopularMovies("").onSuccess { _viewState.value = Success(it) }
             .onFailure { _viewState.value = Error(it.throwable) }
     }
 
     fun loadTopRatedMovies() = executeUseCase {
-        getTopRatedMovies.invoke("").onSuccess { _viewState.value = Success(it) }
+        getTopRatedMovies("").onSuccess { _viewState.value = Success(it) }
             .onFailure { _viewState.value = Error(it.throwable) }
     }
 
     fun loadFavoriteMovies() = executeUseCase {
-        getFavoriteMovies.invoke("") }
+        getFavoriteMovies("").onSuccess { _viewState.value = Success(it) }
+            .onFailure { _viewState.value = Error(it.throwable) }
+    }
 }

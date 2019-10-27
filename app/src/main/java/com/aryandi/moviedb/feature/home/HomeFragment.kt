@@ -24,6 +24,7 @@ class HomeFragment : BaseFragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true);
+        viewModel.loadMovies()
     }
 
     override fun onCreateView(
@@ -38,7 +39,6 @@ class HomeFragment : BaseFragment() {
         subscribeToData()
         recycler_view.layoutManager = GridLayoutManager(context, 2)
         recycler_view.adapter = adapter
-        viewModel.loadMovies()
     }
 
     private fun doOnClickAdapter(movie: MovieDomain) {
