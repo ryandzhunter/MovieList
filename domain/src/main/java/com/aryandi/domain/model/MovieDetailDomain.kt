@@ -1,9 +1,7 @@
 package com.aryandi.domain.model
 
-/**
- * @author Aryandi Putra (aryandi.putra@dana.id)
- * @version MovieDetailDomain, v 0.1 2019-10-22 10:34 by Aryandi Putra
- */
+import com.aryandi.domain.model.MovieDomain
+
 data class MovieDetailDomain(
 
     var adult: Boolean = false,
@@ -14,12 +12,12 @@ data class MovieDetailDomain(
     var homepage: String? = null,
     var id: Int = -1,
     var imdbId: String? = null,
-    var popularity: Double = 0.0,
+    var popularity: Float = 0F,
     var revenue: Int? = null,
     var runtime: Int? = null,
     var tagline: String? = null,
     var video: Boolean = false,
-    var voteAverage: Double = 0.0,
+    var voteAverage: Float = 0F,
     var voteCount: Int = 0,
     var title: String,
     var posterPath: String,
@@ -29,6 +27,30 @@ data class MovieDetailDomain(
     var overview: String,
     var releaseDate: String
 )
+
+fun toMovieDomain(movieDetailDomain: MovieDetailDomain): MovieDomain {
+    movieDetailDomain.let {
+        val genresId = arrayListOf<Int>()
+        it.genres?.forEach {
+            genresId.add(it.id)
+        }
+        return MovieDomain(
+            it.voteCount,
+            it.id,
+            it.video,
+            it.voteAverage,
+            it.title,
+            it.popularity,
+            it.posterPath,
+            it.originalLanguage,
+            it.originalTitle,
+            genresId,
+            it.backdropPath,
+            it.adult,
+            it.overview
+        )
+    }
+}
 
 data class GenreDomain(
     var id: Int,

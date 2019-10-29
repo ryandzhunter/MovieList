@@ -1,5 +1,8 @@
 package com.aryandi.data
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.aryandi.data.database.DB_FAVORITE_MOVIE_TABLE_NAME
 import com.aryandi.data.network.base.DomainMapper
 import com.aryandi.domain.model.MovieDomain
 import com.google.gson.annotations.Expose
@@ -26,9 +29,9 @@ class MovieResponse(
 ) : DomainMapper<List<MovieDomain>> {
 
     override fun mapToDomainModel(): List<MovieDomain> {
-        val list = arrayListOf<MovieDomain>()
+        val moviesDomain = arrayListOf<MovieDomain>()
         results?.forEach{
-            list.add(
+            moviesDomain.add(
                 MovieDomain(
                     it.voteCount,
                     it.id,
@@ -44,21 +47,23 @@ class MovieResponse(
                     it.adult,
                     it.overview,
                     it.releaseDate,
-                    it.watched
+                    it.isFavorite
                 )
             )
         }
-        return list
+        return moviesDomain
     }
 
 }
 
+@Entity(tableName = DB_FAVORITE_MOVIE_TABLE_NAME)
 data class MovieData(
     @SerializedName("vote_count")
     @Expose
     var voteCount: Int? = null,
     @SerializedName("id")
     @Expose
+    @PrimaryKey
     var id: Int? = null,
     @SerializedName("video")
     @Expose
@@ -96,5 +101,4 @@ data class MovieData(
     @SerializedName("release_date")
     @Expose
     var releaseDate: String? = null,
-    var watched: Boolean = false
-)
+    var isFavorite: Boolean? = null)

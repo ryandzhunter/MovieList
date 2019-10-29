@@ -20,5 +20,4 @@ data class MovieDomain(
     var adult: Boolean? = null,
     var overview: String? = null,
     var releaseDate: String? = null,
-    var watched: Boolean = false
-)
+    var isFavorite: Boolean? = null)

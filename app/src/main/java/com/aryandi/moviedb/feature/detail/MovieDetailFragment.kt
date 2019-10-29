@@ -10,6 +10,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aryandi.domain.model.MovieDetailDomain
 import com.aryandi.domain.model.VideoDomain
+import com.aryandi.domain.model.toMovieDomain
 import com.aryandi.moviedb.R
 import com.aryandi.moviedb.base.*
 import com.aryandi.moviedb.common.ext.subscribe
@@ -17,7 +18,6 @@ import com.aryandi.moviedb.feature.detail.adapter.TrailerListAdapter
 import com.aryandi.moviedb.feature.home.adapter.MovieGridAdapter
 import com.bumptech.glide.Glide
 import kotlinx.android.synthetic.main.fragment_movie_detail.*
-import kotlinx.android.synthetic.main.fragment_movie_detail.progress_bar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
@@ -30,6 +30,12 @@ class MovieDetailFragment : BaseFragment() {
     val args: MovieDetailFragmentArgs by navArgs()
     val adapter = TrailerListAdapter(mutableListOf()) { doOnClickAdapter(it) }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.getMovieDetail(args.movieId)
+        viewModel.isFavoriteMovieExist(args.movieId)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -41,9 +47,8 @@ class MovieDetailFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         subscribeToData()
         rv_video_trailer.layoutManager =
-            LinearLayoutManager(view.context, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(view.context, LinearLayoutManager.VERTICAL, false)
         rv_video_trailer.adapter = adapter
-        viewModel.getMovieDetail(args.movieId)
     }
 
     private fun doOnClickAdapter(video: VideoDomain) {
@@ -65,6 +70,12 @@ class MovieDetailFragment : BaseFragment() {
 
     private fun subscribeToData() {
         viewModel.viewState.subscribe(this, ::handleViewState)
+        viewModel.favoriteState.subscribe(this) {
+            hideLoading(progress_bar)
+            btn_favorite_movie.text =
+                if (it) getString(R.string.remove_from_favorite_button)
+                else getString(R.string.add_to_favorite_button)
+        }
     }
 
     private fun handleViewState(viewState: ViewState<MovieDetailDomain>) {
@@ -97,5 +108,10 @@ class MovieDetailFragment : BaseFragment() {
         tv_movie_description.text = data.overview
 
         data.videos?.let { adapter.setVideos(it) }
+
+        btn_favorite_movie.visibility = View.VISIBLE
+        btn_favorite_movie.setOnClickListener {
+            viewModel.onFavoriteButtonClicked(toMovieDomain(data))
+        }
     }
 }

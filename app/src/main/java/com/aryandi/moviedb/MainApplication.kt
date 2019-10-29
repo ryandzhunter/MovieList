@@ -1,6 +1,7 @@
 package com.aryandi.moviedb
 
 import android.app.Application
+import com.aryandi.data.di.dataBaseModules
 import com.aryandi.data.di.networkModules
 import com.aryandi.data.di.repositoryModules
 import com.aryandi.domain.di.useCaseModules
@@ -20,7 +21,7 @@ class MainApplication : Application() {
 
         startKoin {
             androidContext(this@MainApplication)
-            modules(listOf(networkModules, repositoryModules, useCaseModules, presentasionModules))
-        }
+            modules(listOf(networkModules, dataBaseModules,
+                repositoryModules, useCaseModules, presentasionModules))        }
     }
 }
