@@ -23,4 +23,6 @@ To Do
 - Unit Test
 - Dynamic Features
 
+-----------------
+
 This project based on https://github.com/cobeisfresh/CleanArchitecture-Android-Showcase
